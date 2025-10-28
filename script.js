@@ -4,11 +4,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // === VARIABLES GLOBALES ===
     const fisherSection = document.getElementById('fisher-section');
     const mannWhitneySection = document.getElementById('mann-whitney-section');
+    const medianTestSection = document.getElementById('median-test-section'); // Añadido
     const btnFisher = document.getElementById('btn-fisher');
     const btnMann = document.getElementById('btn-mann');
+    const btnMedian = document.getElementById('btn-median'); // Añadido
     const menu = document.querySelector('.options-menu');
     const contentDiv = document.querySelector('.content');
     const menuOffsetTop = menu.offsetTop;
+
+    console.log('medianTestSection element found:', medianTestSection);
+    console.log('btnMedian element found:', btnMedian);
 
     // === LÓGICA DEL MENÚ PEGAJOSO (STICKY) ===
     window.onscroll = function () {
@@ -34,23 +39,33 @@ document.addEventListener('DOMContentLoaded', function () {
     // Asignar eventos a los botones del menú
     btnFisher.addEventListener('click', () => showTest('fisher-section'));
     btnMann.addEventListener('click', () => showTest('mann-whitney-section'));
+    btnMedian.addEventListener('click', () => showTest('median-test-section')); // Añadido
 
     function showTest(sectionId) {
-        // Ocultar ambas secciones
-        fisherSection.classList.add('hidden');
-        mannWhitneySection.classList.add('hidden');
+        const sections = [
+            { id: 'fisher-section', element: fisherSection, button: btnFisher },
+            { id: 'mann-whitney-section', element: mannWhitneySection, button: btnMann },
+            { id: 'median-test-section', element: medianTestSection, button: btnMedian }
+        ];
 
-        // Quitar clase 'active' de ambos botones
-        btnFisher.classList.remove('active');
-        btnMann.classList.remove('active');
+        // Ocultar todas las secciones y desactivar todos los botones
+        sections.forEach(item => {
+            if (item.element) { // Asegurarse de que el elemento existe antes de manipularlo
+                item.element.classList.add('hidden');
+            }
+            if (item.button) { // Asegurarse de que el botón existe antes de manipularlo
+                item.button.classList.remove('active');
+            }
+        });
 
-        // Mostrar la sección seleccionada y activar el botón correspondiente
-        if (sectionId === 'fisher-section') {
-            fisherSection.classList.remove('hidden');
-            btnFisher.classList.add('active');
-        } else if (sectionId === 'mann-whitney-section') {
-            mannWhitneySection.classList.remove('hidden');
-            btnMann.classList.add('active');
+        // Mostrar la sección seleccionada y activar su botón
+        const targetSection = sections.find(item => item.id === sectionId);
+
+        if (targetSection && targetSection.element) {
+            targetSection.element.classList.remove('hidden');
+            if (targetSection.button) {
+                targetSection.button.classList.add('active');
+            }
         }
     }
 
@@ -279,5 +294,57 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    // === GRÁFICA DE LA PRUEBA DE MEDIANAS (Añadido) ===
+    const medianChartCanvas = document.getElementById('medianTestChart');
+    if (medianChartCanvas) {
+        const ctxMedian = medianChartCanvas.getContext('2d');
+        new Chart(ctxMedian, {
+            type: 'boxplot',
+            data: {
+                labels: ['Dieta Vegetariana', 'Dieta Tradicional'],
+                datasets: [{
+                    label: 'Pérdida de Peso (kg)',
+                    data: [
+                        [5.2, 4.8, 6.1, 5.5, 4.9, 6.0, 5.3], // Vegetariana
+                        [3.1, 2.8, 3.5, 4.0, 3.3, 3.9, 2.5]  // Tradicional
+                    ],
+                    backgroundColor: 'rgba(16, 185, 129, 0.5)',
+                    borderColor: 'rgb(16, 185, 129)',
+                    borderWidth: 2,
+                    itemStyle: 'circle',
+                    itemRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return ` ${context.dataset.label}: ${context.parsed.y} kg`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Pérdida de Peso (kg)',
+                            font: { size: 14, weight: 'bold' }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Mostrar la sección de Fisher por defecto al cargar la página
+    showTest('fisher-section');
 
 });
