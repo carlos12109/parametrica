@@ -1055,6 +1055,158 @@
                 </div>
             </div>
 
+            <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas Estadísticas</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            background: #f3f4f6;
+            color: #333;
+        }
+
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .options-menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background: #3b82f6;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+        }
+
+        .options-menu button {
+            background: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .options-menu button:hover {
+            background: #e0f2fe;
+        }
+
+        .options-menu .active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h2 {
+            color: #1e40af;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        strong {
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+
+    <header>📊 Análisis de Pruebas Estadísticas</header>
+
+
+            <p><strong>Paso 7. Cálculo del p-valor exacto (bilateral)</strong></p>
+            <p>1) Calcula 𝑈</p>
+            <p>Ordenando todo, los 6 más bajos son del grupo “Sí actividad” → sus rangos son: 1,2,3,4,5,6.</p>
+            <p>Suma de rangos: 𝑊1 = 21, 𝑊2 = 57.</p>
+            <p>Con 𝑛1 = 𝑛2 = 6:</p>
+            <p>𝑈1 = 36+21−21=36, 𝑈2 = 36+21−57=0, 𝑈 = min(36,0)=0.</p>
+
+            <p><strong>2) ¿Cómo saco el p-valor exacto aquí?</strong></p>
+            <p>Este es un caso extremo: todos los de “Sí actividad” &lt; todos los de “No actividad”. En ese caso, el p-valor exacto se calcula contando combinaciones.</p>
+
+            <p><strong>2.1) Repartición de valores</strong></p>
+            <p>¿Cuántas formas hay de repartir 12 valores en dos grupos de 6?</p>
+            <p>(12 choose 6) = 12⋅11⋅10⋅9⋅8⋅7 / 6⋅5⋅4⋅3⋅2⋅1 = 924.</p>
+            <p>Cada una de esas 924 formas es igual de probable si 𝐻₀ es cierta.</p>
+
+            <p><strong>2.2) Probabilidad de un evento tan extremo</strong></p>
+            <p>Unilateral: solo hay 1 forma completamente ordenada así → p_uni = 1 / 924 ≈ 0.00108.</p>
+            <p>Bilateral: se duplican los casos extremos → p_bi = 2 / 924 = 1 / 462 ≈ 0.00216.</p>
+
+            <p><strong>3) Conclusión</strong></p>
+            <p>Comparando con α = 0.05 → p_bi ≈ 0.00216 &lt; 0.05 ⇒ Rechazamos 𝐻₀.</p>
+            <p>Hay evidencia de diferencia entre grupos: la FCR del grupo “Sí actividad” es más baja.</p>
+
+            <p><strong>4) Informe final</strong></p>
+            <p>“Se aplicó la prueba U de Mann–Whitney para comparar la FCR en reposo entre jóvenes que realizan actividad física (n=6) y quienes no (n=6). Se observó una diferencia significativa, U=0, p=0.0022 (bilateral), indicando menor FCR en el grupo con actividad física. Con α=0.05, el estadístico está por debajo del valor crítico (U_crítico=5), por lo que se rechaza H₀ y se acepta H₁.”</p>
+        </section>
+
+        <!-- === PRUEBA DE MEDIANAS === -->
+        <section id="median-test-section" class="hidden">
+            <h2>Prueba de Medianas</h2>
+            <p>Resultados de la prueba de medianas.</p>
+        </section>
+    </div>
+
+    <!-- === SCRIPT === -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fisherSection = document.getElementById('fisher-section');
+            const mannWhitneySection = document.getElementById('mann-whitney-section');
+            const medianTestSection = document.getElementById('median-test-section');
+            const btnFisher = document.getElementById('btn-fisher');
+            const btnMann = document.getElementById('btn-mann');
+            const btnMedian = document.getElementById('btn-median');
+
+            function showTest(sectionId) {
+                const sections = [
+                    { element: fisherSection, button: btnFisher },
+                    { element: mannWhitneySection, button: btnMann },
+                    { element: medianTestSection, button: btnMedian }
+                ];
+
+                sections.forEach(item => {
+                    item.element.classList.add('hidden');
+                    item.button.classList.remove('active');
+                });
+
+                const target = sections.find(s => s.element.id === sectionId);
+                target.element.classList.remove('hidden');
+                target.button.classList.add('active');
+            }
+
+            btnFisher.addEventListener('click', () => showTest('fisher-section'));
+            btnMann.addEventListener('click', () => showTest('mann-whitney-section'));
+            btnMedian.addEventListener('click', () => showTest('median-test-section'));
+
+            // Mostrar solo Fisher al inicio
+            showTest('fisher-section');
+        });
+    </script>
+
+
+
+            
+
             <!-- =================================== -->
             <!-- === SECCIÓN PRUEBA DE LA MEDIANA === -->
             <!-- =================================== -->
