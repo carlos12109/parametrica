@@ -447,9 +447,14 @@
             <h1>📊 Pruebas No Paramétricas</h1>
             <h2>Seleccione una prueba para ver el ejemplo detallado</h2>
             <div class="author-info">
-                <p><strong>Docente:</strong> [Nombre del Docente]</p>
-                <p><strong>Integrantes:</strong> VIDMAN RUIS ROQUE MAMANI, NICOLE GERALDINE SULLCAHUAMAN CHAMBI, KEYSI
-                    SALCA LAGAR, ABRAN COSI COSI, RONADHINO JINEZ INCACUTIPA</p>
+                <p><strong>Docente:</strong> Dra. Teresa Paola Alvarez Rozas</p>
+                <p><strong>Integrantes:</strong>
+                    <span style="color: #A7F3D0;">Abran Cosi Cosi</span>,
+                    <span style="color: #FDE68A;">Keysi Salca Lagar</span>,
+                    <span style="color: #FBCFE8;">Nicole Geraldine Sullcahuaman Chambi</span>,
+                    <span style="color: #BFDBFE;">Ronadhino Jinez Incacutipa</span>,
+                    <span style="color: #FED7AA;">Vidman Ruiz Roque Mamani</span>
+                </p>
             </div>
         </div>
 
@@ -457,6 +462,7 @@
             <div class="options-menu">
                 <button id="btn-fisher" onclick="showTest('fisher-section')">Prueba Exacta de Fisher</button>
                 <button id="btn-mann" onclick="showTest('mann-whitney-section')">Prueba U de Mann-Whitney</button>
+                <button id="btn-median" onclick="showTest('median-test-section')">Prueba de la Mediana</button>
             </div>
 
             <!-- =============================== -->
@@ -1044,6 +1050,223 @@
                         <div class="chart-container">
                             <h4>Frecuencia Cardiaca por Grupo</h4>
                             <canvas id="boxPlotChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =================================== -->
+            <!-- === SECCIÓN PRUEBA DE LA MEDIANA === -->
+            <!-- =================================== -->
+            <div id="median-test-section" class="hidden" style="margin-top: 20px;">
+                <div class="header" style="border-radius: 15px 15px 0 0;">
+                    <h1>⚖️ PRUEBA DE LA MEDIANA</h1>
+                    <h2>Comparación de Pérdida de Peso entre Dos Dietas</h2>
+                </div>
+
+                <div class="content" style="border: 2px solid #667eea; border-top: none; border-radius: 0 0 15px 15px;">
+                    <!-- Contexto -->
+                    <div class="context-box">
+                        <p><strong>📋 Contexto del Estudio:</strong> Una nutricionista desea comparar si dos planes de
+                            alimentación (dieta vegetariana y dieta tradicional) producen diferencias en la pérdida de
+                            peso corporal después de 8 semanas.</p>
+                        <p style="margin-top: 10px;"><strong>❓ Pregunta de Investigación:</strong> ¿Las medianas de
+                            pérdida de peso difieren entre las dos dietas? (α = 0.05, bilateral)</p>
+                    </div>
+
+                    <!-- Datos -->
+                    <div class="section">
+                        <h3>🔢 DATOS RECOPILADOS (Pérdida en kg)</h3>
+                        <div class="results-grid">
+                            <div class="result-card descriptive">
+                                <h4>Dieta Vegetariana (n₁ = 7)</h4>
+                                <p>5.2, 4.8, 6.1, 5.5, 4.9, 6.0, 5.3</p>
+                            </div>
+                            <div class="result-card"
+                                style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b;">
+                                <h4 style="color: #92400e;">Dieta Tradicional (n₂ = 7)</h4>
+                                <p style="color: #78350f;">3.1, 2.8, 3.5, 4.0, 3.3, 3.9, 2.5</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 1: HIPÓTESIS -->
+                    <div class="section">
+                        <h3>PASO 1: Plantear Hipótesis</h3>
+                        <div class="hypothesis-box">
+                            <h4>🔵 H₀ (Hipótesis Nula):</h4>
+                            <p>Mediana(Vegetariana) = Mediana(Tradicional)</p>
+                            <p>No hay diferencia en la mediana de pérdida de peso entre las dietas.</p>
+                            <h4 style="margin-top: 15px;">🔴 H₁ (Hipótesis Alternativa):</h4>
+                            <p>Mediana(Vegetariana) ≠ Mediana(Tradicional)</p>
+                            <p>Existe una diferencia en la mediana de pérdida de peso.</p>
+                            <p><strong>Tipo de prueba: BILATERAL</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- PASO 2 y 3: MEDIANA GLOBAL -->
+                    <div class="section">
+                        <h3>PASO 2 y 3: Combinar Datos y Calcular Mediana Global</h3>
+                        <div class="step-box">
+                            <h4>Datos combinados y ordenados (N=14):</h4>
+                            <div class="calculation">
+                                <p>2.5, 2.8, 3.1, 3.3, 3.5, 3.9, <strong style="color: #ef4444;">4.0</strong>, <strong
+                                        style="color: #3b82f6;">4.8</strong>, 4.9, 5.2, 5.3, 5.5, 6.0, 6.1</p>
+                            </div>
+                            <h4>Cálculo de la Mediana Global:</h4>
+                            <p>Como N=14 (par), la mediana es el promedio de los dos valores centrales (posiciones 7 y
+                                8).</p>
+                            <div class="formula" style="text-align: center; font-size: 1.1em;">
+                                Mediana Global = (4.0 + 4.8) / 2
+                            </div>
+                            <div class="result-highlight">
+                                Mediana Global = 4.4 kg
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 4: CLASIFICAR OBSERVACIONES -->
+                    <div class="section">
+                        <h3>PASO 4: Clasificar Cada Observación</h3>
+                        <p>Se clasifica cada valor de los grupos como "Arriba" o "Debajo" de la mediana global (4.4 kg).
+                        </p>
+                        <div class="results-grid">
+                            <div class="step-box" style="margin: 0;">
+                                <h4>Dieta Vegetariana (7 arriba, 0 debajo)</h4>
+                                <ul style="list-style-type: '✓ '; padding-left: 20px; color: #047857;">
+                                    <li>5.2 → Arriba de 4.4</li>
+                                    <li>4.8 → Arriba de 4.4</li>
+                                    <li>6.1 → Arriba de 4.4</li>
+                                    <li>5.5 → Arriba de 4.4</li>
+                                    <li>4.9 → Arriba de 4.4</li>
+                                    <li>6.0 → Arriba de 4.4</li>
+                                    <li>5.3 → Arriba de 4.4</li>
+                                </ul>
+                            </div>
+                            <div class="step-box" style="margin: 0;">
+                                <h4>Dieta Tradicional (0 arriba, 7 debajo)</h4>
+                                <ul style="list-style-type: '✗ '; padding-left: 20px; color: #991b1b;">
+                                    <li>3.1 → Debajo de 4.4</li>
+                                    <li>2.8 → Debajo de 4.4</li>
+                                    <li>3.5 → Debajo de 4.4</li>
+                                    <li>4.0 → Debajo de 4.4</li>
+                                    <li>3.3 → Debajo de 4.4</li>
+                                    <li>3.9 → Debajo de 4.4</li>
+                                    <li>2.5 → Debajo de 4.4</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 5: TABLA DE CONTINGENCIA -->
+                    <div class="section">
+                        <h3>PASO 5: Construir Tabla de Contingencia 2x2</h3>
+                        <p>Con los conteos del paso anterior, se construye la tabla de contingencia.</p>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Grupo</th>
+                                        <th>Arriba de 4.4</th>
+                                        <th>Debajo de 4.4</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="row-vacuna">
+                                        <td><strong>Dieta Vegetariana</strong></td>
+                                        <td><strong>7</strong> (a)</td>
+                                        <td><strong>0</strong> (b)</td>
+                                        <td><strong>7</strong></td>
+                                    </tr>
+                                    <tr class="row-placebo">
+                                        <td><strong>Dieta Tradicional</strong></td>
+                                        <td><strong>0</strong> (c)</td>
+                                        <td><strong>7</strong> (d)</td>
+                                        <td><strong>7</strong></td>
+                                    </tr>
+                                    <tr class="row-total">
+                                        <td><strong>TOTAL</strong></td>
+                                        <td><strong>7</strong></td>
+                                        <td><strong>7</strong></td>
+                                        <td><strong>14</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- PASO 6: APLICAR PRUEBA EXACTA DE FISHER (ahora Paso 6) -->
+                    <div class="section">
+                        <h3>PASO 6: Aplicar Prueba Exacta de Fisher</h3>
+                        <div class="step-box">
+                            <p>La tabla de contingencia resultante muestra una separación perfecta. La Prueba de la
+                                Mediana utiliza la Prueba Exacta de Fisher para calcular el p-valor en tablas 2x2.</p>
+                            <h4>Cálculo de la probabilidad de la tabla observada:</h4>
+                            <div class="formula">
+                                P(observada) = [7! × 7! × 7! × 7!] / [14! × 7! × 0! × 0! × 7!]
+                            </div>
+                            <div class="calculation">
+                                <p>P(observada) ≈ 0.000291</p>
+                            </div>
+                            <p>Dado que la tabla ya muestra la máxima separación posible, no hay tablas más extremas.
+                            </p>
+                            <h4>Cálculo del p-valor bilateral:</h4>
+                            <div class="formula">
+                                p-valor = 2 × P(observada)
+                            </div>
+                            <div class="result-highlight">
+                                p-valor = 2 × 0.000291 ≈ 0.00058
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 7: DECISIÓN (ahora Paso 7) -->
+                    <div class="section">
+                        <h3>PASO 7: Decisión Estadística</h3>
+                        <div class="decision-box">
+                            <h3>📊 DECISIÓN</h3>
+                            <p><strong>Nivel de significancia:</strong> α = 0.05</p>
+                            <p><strong>Comparación:</strong> p-valor = 0.00058 < 0.05</p>
+                                    <p style="font-size: 1.5em; margin-top: 20px; color: #9a3412;">
+                                        <strong>✅ RECHAZAMOS H₀</strong>
+                                    </p>
+                        </div>
+                    </div>
+
+                    <!-- PASO 8: INTERPRETACIÓN (ahora Paso 8) -->
+                    <div class="section">
+                        <h3>PASO 8: Interpretación</h3>
+                        <div class="interpretation-box"
+                            style="background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-color: #10b981;">
+                            <h4 style="color: #065f46;">🔍 Conclusión Estadística:</h4>
+                            <p style="color: #047857;">Existe evidencia estadística muy significativa (p < 0.001) para
+                                    afirmar que las medianas de pérdida de peso difieren entre las dos dietas.</p>
+
+                                    <h4 style="margin-top: 20px; color: #065f46;">💡 Interpretación Práctica:</h4>
+                                    <p style="color: #047857;">La Dieta Vegetariana resulta en una pérdida de peso
+                                        significativamente mayor (mediana = 5.3 kg) en comparación con la Dieta
+                                        Tradicional
+                                        (mediana = 3.3 kg). La diferencia de 2.0 kg representa un aumento del 60.6% en
+                                        la
+                                        efectividad.</p>
+                                    <p style="color: #047857;">La separación perfecta (ningún paciente de la dieta
+                                        tradicional
+                                        superó la mediana global) indica un efecto muy fuerte y consistente.</p>
+
+                                    <h4 style="margin-top: 20px; color: #065f46;">📌 Recomendación:</h4>
+                                    <p style="color: #047857;">Para programas de pérdida de peso a 8 semanas, la Dieta
+                                        Vegetariana demuestra ser significativamente más efectiva que la Dieta
+                                        Tradicional.</p>
+                        </div>
+                    </div>
+
+                    <!-- GRÁFICAS -->
+                    <div class="section">
+                        <h3>📊 VISUALIZACIONES</h3>
+                        <div class="chart-container">
+                            <h4>Pérdida de Peso por Tipo de Dieta</h4>
+                            <canvas id="medianTestChart"></canvas>
                         </div>
                     </div>
                 </div>
