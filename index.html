@@ -448,13 +448,14 @@
             <h2>Seleccione una prueba para ver el ejemplo detallado</h2>
             <div class="author-info">
                 <p><strong>Docente:</strong> Dra. Teresa Paola Alvarez Rozas</p>
-                <p><strong>Integrantes:</strong>
-                    <span style="color: #A7F3D0;">Abran Cosi Cosi</span>,
-                    <span style="color: #FDE68A;">Keysi Salca Lagar</span>,
-                    <span style="color: #FBCFE8;">Nicole Geraldine Sullcahuaman Chambi</span>,
-                    <span style="color: #BFDBFE;">Ronadhino Jinez Incacutipa</span>,
-                    <span style="color: #FED7AA;">Vidman Ruiz Roque Mamani</span>
-                </p>
+                <p><strong>Integrantes:</strong></p>
+                <ul style="list-style-type: none; padding: 0; margin-top: 8px;">
+                    <li><span style="color: #A7F3D0;">Abran Cosi Cosi</span></li>
+                    <li><span style="color: #FDE68A;">Keysi Salca Lagar</span></li>
+                    <li><span style="color: #FBCFE8;">Nicole Geraldine Sullcahuaman Chambi</span></li>
+                    <li><span style="color: #BFDBFE;">Ronadhino Jinez Incacutipa</span></li>
+                    <li><span style="color: #FED7AA;">Vidman Ruis Roque Mamani</span></li>
+                </ul>
             </div>
         </div>
 
@@ -811,16 +812,14 @@
                 <div class="content" style="border: 2px solid #667eea; border-top: none; border-radius: 0 0 15px 15px;">
                     <!-- Contexto -->
                     <div class="context-box">
-                        <p><strong>📋 Contexto del Estudio:</strong> Un investigador desea comparar la
-                            frecuencia
-                            cardiaca en reposo (latidos por minuto) de dos grupos de jóvenes: aquellos que
-                            realizan
-                            actividad física regularmente y aquellos que no.</p>
-                        <p style="margin-top: 10px;"><strong>❓ Pregunta de Investigación:</strong> ¿La práctica
-                            de
-                            actividad física se asocia con una frecuencia cardiaca en reposo diferente? (α =
-                            0.05,
-                            prueba bilateral)</p>
+                        <p><strong>📋 Contexto del Estudio:</strong> Un investigador desea comparar la frecuencia
+                            cardiaca en reposo (lpm) de dos grupos de jóvenes —quienes realizan actividad física y
+                            quienes no— para determinar si la práctica de actividad física se asocia con una frecuencia
+                            cardiaca en reposo más baja.</p>
+                        <p style="margin-top: 10px;"><strong>❓ Pregunta de Investigación:</strong> ¿Existe diferencia
+                            significativa en la frecuencia cardiaca en reposo entre ambos grupos? (α = 0.05,
+                            prueba bilateral)
+                        </p>
                     </div>
 
                     <!-- VERIFICACIÓN DE SUPUESTOS -->
@@ -993,54 +992,89 @@
                         </div>
                     </div>
 
-                    <!-- PASO 5: VALOR CRÍTICO -->
+                    <!-- PASO 5: P-VALOR -->
                     <div class="section">
-                        <h3>PASO 5: Valor Crítico y Regla de Decisión</h3>
+                        <h3>PASO 5: Calcular p-valor Exacto (Bilateral)</h3>
+                        <div class="step-box">
+                            <p>Este es un caso extremo: todos los valores del grupo "Sí actividad" son menores que todos
+                                los del grupo "No actividad". El p-valor exacto se calcula contando combinaciones.</p>
+
+                            <h4 style="margin-top: 20px;">1. ¿Cuántas formas hay de repartir 12 valores en dos grupos de
+                                6?</h4>
+                            <div class="formula">
+                                Combinaciones = C(12, 6) = 12! / (6! * (12-6)!) = 924
+                            </div>
+                            <p>Hay 924 formas posibles de dividir a los 12 participantes. Si la H₀ es cierta, todas son
+                                igualmente probables.</p>
+
+                            <h4 style="margin-top: 20px;">2. ¿Cuál es la probabilidad de un resultado tan extremo como
+                                U=0?</h4>
+                            <p>Solo hay <strong>dos</strong> formas de obtener una separación perfecta:</p>
+                            <ul style="list-style-position: inside; padding-left: 15px; margin: 10px 0;">
+                                <li>Que el grupo "Sí actividad" tenga los 6 rangos más bajos (nuestro caso).</li>
+                                <li>Que el grupo "No actividad" tenga los 6 rangos más bajos.</li>
+                            </ul>
+                            <p>La probabilidad unilateral (solo una de esas dos formas) es 1/924.</p>
+
+                            <h4 style="margin-top: 20px;">3. Cálculo del p-valor bilateral:</h4>
+                            <p>Como la prueba es bilateral, consideramos los dos casos extremos:</p>
+                            <div class="formula">
+                                p-valor = 2 × P(unilateral) = 2 × (1 / 924) ≈ 0.00216
+                            </div>
+                            <div class="result-highlight">
+                                p-valor ≈ 0.0022
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 6: VALOR CRÍTICO -->
+                    <div class="section">
+                        <h3>PASO 6: Valor Crítico y Regla de Decisión</h3>
                         <div class="step-box">
                             <p>Buscamos en la tabla de valores críticos de Mann-Whitney para:</p>
-                            <ul>
+                            <ul style="list-style-position: inside; padding-left: 15px;">
                                 <li>n₁ = 6</li>
                                 <li>n₂ = 6</li>
                                 <li>α = 0.05 (bilateral)</li>
                             </ul>
                             <div class="result-highlight">
-                                Ucrítico = 5
+                                U<sub>crítico</sub> = 5
                             </div>
                             <div class="hypothesis-box" style="margin-top: 20px;">
                                 <h4>Regla de Decisión:</h4>
-                                <p>Rechazar H₀ si U ≤ Ucrítico</p>
+                                <p>Rechazar H₀ si U ≤ U<sub>crítico</sub></p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- PASO 6: DECISIÓN -->
+                    <!-- PASO 7: DECISIÓN -->
                     <div class="section">
-                        <h3>PASO 6: Decisión Estadística</h3>
+                        <h3>PASO 7: Decisión Estadística</h3>
                         <div class="decision-box">
                             <h3>📊 DECISIÓN</h3>
-                            <p><strong>Comparación:</strong> U = 0 ≤ Ucrítico = 5</p>
-                            <p style="font-size: 1.5em; margin-top: 20px; color: #9a3412;">
-                                <strong>✅ RECHAZAMOS H₀</strong>
-                            </p>
+                            <p><strong>Usando p-valor:</strong> p-valor (0.0022) < α (0.05)</p>
+                                    <p><strong>Usando valor crítico:</strong> U (0) ≤ U<sub>crítico</sub> (5)</p>
+                                    <p style="font-size: 1.5em; margin-top: 20px; color: #9a3412;">
+                                        <strong>✅ RECHAZAMOS H₀</strong>
+                                    </p>
                         </div>
                     </div>
 
-                    <!-- PASO 7: INTERPRETACIÓN -->
+                    <!-- PASO 8: INTERPRETACIÓN -->
                     <div class="section">
-                        <h3>PASO 7: Interpretación</h3>
+                        <h3>PASO 8: Interpretación</h3>
                         <div class="interpretation-box"
                             style="background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-color: #10b981;">
                             <h4 style="color: #065f46;">🔍 Conclusión Final:</h4>
-                            <p style="color: #047857;">Existe una <strong>diferencia estadísticamente
-                                    significativa</strong> en la frecuencia cardiaca en reposo entre los jóvenes
-                                que
-                                realizan actividad física y los que no.</p>
-                            <p style="color: #047857;">En promedio, quienes practican actividad física presentan
-                                una
-                                frecuencia cardiaca en reposo más baja, lo que sugiere un corazón más eficiente
-                                y
-                                relajado. Este hallazgo confirma la hipótesis de investigación y coincide con la
-                                literatura fisiológica.</p>
+                            <p style="color: #047857;">Se aplicó la prueba U de Mann-Whitney para comparar la FCR en
+                                reposo entre jóvenes que realizan actividad física (n=6) y quienes no (n=6). Se observó
+                                una diferencia significativa (U=0, p≈0.0022, bilateral).</p>
+                            <p style="color: #047857;">Con α=0.05, el estadístico (U=0) está por debajo del valor
+                                crítico
+                                (U<sub>crítico</sub>=5), por lo que se rechaza la hipótesis nula.</p>
+                            <p style="color: #047857; margin-top: 15px; font-weight: bold;">Hay evidencia a favor de H₁:
+                                las distribuciones difieren y, observando los datos, la FCR en reposo es menor en el
+                                grupo con actividad física (corazón más "tranquilo").</p>
                         </div>
                     </div>
 
@@ -1054,158 +1088,6 @@
                     </div>
                 </div>
             </div>
-
-            <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pruebas Estadísticas</title>
-
-    <style>
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            margin: 0;
-            background: #f3f4f6;
-            color: #333;
-        }
-
-        header {
-            background: #1e3a8a;
-            color: white;
-            padding: 15px 25px;
-            text-align: center;
-            font-size: 1.5em;
-        }
-
-        .options-menu {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            background: #3b82f6;
-            padding: 10px;
-            position: sticky;
-            top: 0;
-        }
-
-        .options-menu button {
-            background: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 1em;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .options-menu button:hover {
-            background: #e0f2fe;
-        }
-
-        .options-menu .active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .content {
-            padding: 30px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        h2 {
-            color: #1e40af;
-        }
-
-        p {
-            line-height: 1.6;
-        }
-
-        strong {
-            color: #111827;
-        }
-    </style>
-</head>
-<body>
-
-    <header>📊 Análisis de Pruebas Estadísticas</header>
-
-
-            <p><strong>Paso 7. Cálculo del p-valor exacto (bilateral)</strong></p>
-            <p>1) Calcula 𝑈</p>
-            <p>Ordenando todo, los 6 más bajos son del grupo “Sí actividad” → sus rangos son: 1,2,3,4,5,6.</p>
-            <p>Suma de rangos: 𝑊1 = 21, 𝑊2 = 57.</p>
-            <p>Con 𝑛1 = 𝑛2 = 6:</p>
-            <p>𝑈1 = 36+21−21=36, 𝑈2 = 36+21−57=0, 𝑈 = min(36,0)=0.</p>
-
-            <p><strong>2) ¿Cómo saco el p-valor exacto aquí?</strong></p>
-            <p>Este es un caso extremo: todos los de “Sí actividad” &lt; todos los de “No actividad”. En ese caso, el p-valor exacto se calcula contando combinaciones.</p>
-
-            <p><strong>2.1) Repartición de valores</strong></p>
-            <p>¿Cuántas formas hay de repartir 12 valores en dos grupos de 6?</p>
-            <p>(12 choose 6) = 12⋅11⋅10⋅9⋅8⋅7 / 6⋅5⋅4⋅3⋅2⋅1 = 924.</p>
-            <p>Cada una de esas 924 formas es igual de probable si 𝐻₀ es cierta.</p>
-
-            <p><strong>2.2) Probabilidad de un evento tan extremo</strong></p>
-            <p>Unilateral: solo hay 1 forma completamente ordenada así → p_uni = 1 / 924 ≈ 0.00108.</p>
-            <p>Bilateral: se duplican los casos extremos → p_bi = 2 / 924 = 1 / 462 ≈ 0.00216.</p>
-
-            <p><strong>3) Conclusión</strong></p>
-            <p>Comparando con α = 0.05 → p_bi ≈ 0.00216 &lt; 0.05 ⇒ Rechazamos 𝐻₀.</p>
-            <p>Hay evidencia de diferencia entre grupos: la FCR del grupo “Sí actividad” es más baja.</p>
-
-            <p><strong>4) Informe final</strong></p>
-            <p>“Se aplicó la prueba U de Mann–Whitney para comparar la FCR en reposo entre jóvenes que realizan actividad física (n=6) y quienes no (n=6). Se observó una diferencia significativa, U=0, p=0.0022 (bilateral), indicando menor FCR en el grupo con actividad física. Con α=0.05, el estadístico está por debajo del valor crítico (U_crítico=5), por lo que se rechaza H₀ y se acepta H₁.”</p>
-        </section>
-
-        <!-- === PRUEBA DE MEDIANAS === -->
-        <section id="median-test-section" class="hidden">
-            <h2>Prueba de Medianas</h2>
-            <p>Resultados de la prueba de medianas.</p>
-        </section>
-    </div>
-
-    <!-- === SCRIPT === -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const fisherSection = document.getElementById('fisher-section');
-            const mannWhitneySection = document.getElementById('mann-whitney-section');
-            const medianTestSection = document.getElementById('median-test-section');
-            const btnFisher = document.getElementById('btn-fisher');
-            const btnMann = document.getElementById('btn-mann');
-            const btnMedian = document.getElementById('btn-median');
-
-            function showTest(sectionId) {
-                const sections = [
-                    { element: fisherSection, button: btnFisher },
-                    { element: mannWhitneySection, button: btnMann },
-                    { element: medianTestSection, button: btnMedian }
-                ];
-
-                sections.forEach(item => {
-                    item.element.classList.add('hidden');
-                    item.button.classList.remove('active');
-                });
-
-                const target = sections.find(s => s.element.id === sectionId);
-                target.element.classList.remove('hidden');
-                target.button.classList.add('active');
-            }
-
-            btnFisher.addEventListener('click', () => showTest('fisher-section'));
-            btnMann.addEventListener('click', () => showTest('mann-whitney-section'));
-            btnMedian.addEventListener('click', () => showTest('median-test-section'));
-
-            // Mostrar solo Fisher al inicio
-            showTest('fisher-section');
-        });
-    </script>
-
-
-
-            
 
             <!-- =================================== -->
             <!-- === SECCIÓN PRUEBA DE LA MEDIANA === -->
